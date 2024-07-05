@@ -1,7 +1,7 @@
 Tax Calculator Web API v.1
 
 
-This project is a Tax Calculator Web API application developed for .NET 6. The implementation follows SOLID principles and main design patterns. The .sln does not require initial installation. When the boundaries become more than one EF migrations can be performed. Additionally the DbContext can me adapted for different DB providers.
+This project is a Tax Calculator Web API application developed for .NET 6. The implementation follows SOLID principles and main design patterns. The .sln does not require initial installation. When the boundaries become more than one EF migrations can be performed. Additionally the DbContext can be adapted for different DB providers. The adapter pattern can take a role here too.
 
 Technologies
 
