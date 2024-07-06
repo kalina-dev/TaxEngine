@@ -30,7 +30,7 @@ namespace TaxCalculator.UnitTests.Application.Services
         }
 
         [Fact]
-        public bool TaxCalculationService_CalculateTaxes_With_Valid_TaxPayer_Should_Return_Correct_Taxes()
+        public void TaxCalculationService_CalculateTaxes_With_Valid_TaxPayer_Should_Return_Correct_Taxes()
         {
             var taxPayer = new TaxEngine("Mehmet Aksak", DateTime.Now, 5000, 1234567890, 100);
 
@@ -48,11 +48,10 @@ namespace TaxCalculator.UnitTests.Application.Services
             Assert.Equal(2, result.Taxes.Count);
             Assert.Equal(390, result.Taxes[TaxType.IncomeTax.ToString()]);
             Assert.Equal(300, result.Taxes[TaxType.SocialTax.ToString()]);
-            return true;
         }
 
         [Fact]
-        public bool CalculateTaxes_WithZeroGrossIncome_ShouldReturnZeroTaxes()
+        public void CalculateTaxes_WithZeroGrossIncome_ShouldReturnZeroTaxes()
         {
             var taxPayer = new TaxEngine("Mehmet Aksak", DateTime.Now, 0, 4234355, 50);
 
@@ -71,7 +70,6 @@ namespace TaxCalculator.UnitTests.Application.Services
             Assert.Equal(2, result.Taxes.Count);
             Assert.Equal(0, result.Taxes[TaxType.IncomeTax.ToString()]);
             Assert.Equal(0, result.Taxes[TaxType.SocialTax.ToString()]);
-            return true;
         }
     }
 }

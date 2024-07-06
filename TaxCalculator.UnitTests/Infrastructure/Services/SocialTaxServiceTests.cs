@@ -47,29 +47,27 @@ namespace TaxCalculator.UnitTests.Infrastructure.Services
         }
 
         [Fact]
-        public bool SocialTaxCalculator_CalculateTax_With_Less_Than_Or_Equal_1000_Income_And_No_Charity_Should_Return_SocialTax_As_Zero()
+        public void SocialTaxCalculator_CalculateTax_With_Less_Than_Or_Equal_1000_Income_And_No_Charity_Should_Return_SocialTax_As_Zero()
         {
             var taxPayer = new TaxEngine("Mehmet Aksak", DateTime.Now, 500, 1234567890, 0);
 
             var tax = _socialTaxCalculator.CalculateTax(taxPayer);
 
             Assert.Equal(0, tax);
-            return true;
         }
 
         [Fact]
-        public bool SocialTaxCalculator_CalculateTax_With_Higher_Than_1000_Income_And_No_Charity_Should_Return_SocialTax()
+        public void SocialTaxCalculator_CalculateTax_With_Higher_Than_1000_Income_And_No_Charity_Should_Return_SocialTax()
         {
             var taxPayer = new TaxEngine("Mehmet Aksak", DateTime.Now, 1800, 1234567890, 0);
 
             var tax = _socialTaxCalculator.CalculateTax(taxPayer);
 
             Assert.Equal(120, tax);
-            return true;
         }
 
         [Fact]
-        public bool SocialTaxCalculator_CalculateTax_With_Income_1000_And_No_Charity_Should_Return_SocialTax_As_Zero()
+        public void SocialTaxCalculator_CalculateTax_With_Income_1000_And_No_Charity_Should_Return_SocialTax_As_Zero()
 
         {
             var taxPayer = new TaxEngine("Mehmet Aksak", DateTime.Now, 1000, 1234567890, 0);
@@ -77,7 +75,6 @@ namespace TaxCalculator.UnitTests.Infrastructure.Services
             var tax = _socialTaxCalculator.CalculateTax(taxPayer);
 
             Assert.Equal(0, tax);
-            return true;
         }
 
 
@@ -85,14 +82,13 @@ namespace TaxCalculator.UnitTests.Infrastructure.Services
         [InlineData(1000, 50, 0)]
         [InlineData(800, 100, 0)]
         [InlineData(0, 100, 0)]
-        public bool SocialTaxCalculator_CalculateTax_With_Less_Than_Or_Equal_1000_Income_And_With_Charity_Should_Return_SocialTax_As_Zero(decimal grossIncome, decimal charitySpent, decimal expectedTax)
+        public void SocialTaxCalculator_CalculateTax_With_Less_Than_Or_Equal_1000_Income_And_With_Charity_Should_Return_SocialTax_As_Zero(decimal grossIncome, decimal charitySpent, decimal expectedTax)
         {
             var taxPayer = new TaxEngine("Mehmet Aksak", DateTime.Now, grossIncome, 1234567890, charitySpent);
 
             var tax = _socialTaxCalculator.CalculateTax(taxPayer);
 
             Assert.Equal(expectedTax, tax);
-            return true;
         }
 
         [Theory]
@@ -101,38 +97,35 @@ namespace TaxCalculator.UnitTests.Infrastructure.Services
         [InlineData(1050, 120, 0)]
         [InlineData(1050, 300, 0)]
         [InlineData(1100, 300, 0)]
-        public bool SocialTaxCalculator_CalculateTax_If_Taxable_Income_Less_Than_Or_Equal_1000_And_With_Higher_Than_1000_Income_And_With_Charity_Should_Return_SocialTax_As_Zero(decimal grossIncome, decimal charitySpent, decimal expectedTax)
+        public void SocialTaxCalculator_CalculateTax_If_Taxable_Income_Less_Than_Or_Equal_1000_And_With_Higher_Than_1000_Income_And_With_Charity_Should_Return_SocialTax_As_Zero(decimal grossIncome, decimal charitySpent, decimal expectedTax)
         {
             var taxPayer = new TaxEngine("Mehmet Aksak", DateTime.Now, grossIncome, 1234567890, charitySpent);
 
             var tax = _socialTaxCalculator.CalculateTax(taxPayer);
 
             Assert.Equal(expectedTax, tax);
-            return true;
         }
 
         [Theory]
         [InlineData(1200, 100, 15)]
         [InlineData(1200, 200, 12)]
-        public bool SocialTaxCalculator_CalculateTax_If_Taxable_Income_Higher_Than_1000_And_With_Higher_Than_1000_Income_And_With_Charity_Should_Return_SocialTax(decimal grossIncome, decimal charitySpent, decimal expectedTax)
+        public void SocialTaxCalculator_CalculateTax_If_Taxable_Income_Higher_Than_1000_And_With_Higher_Than_1000_Income_And_With_Charity_Should_Return_SocialTax(decimal grossIncome, decimal charitySpent, decimal expectedTax)
         {
             var taxPayer = new TaxEngine("Mehmet Aksak", DateTime.Now, grossIncome, 1234567890, charitySpent);
 
             var tax = _socialTaxCalculator.CalculateTax(taxPayer);
 
             Assert.Equal(expectedTax, tax);
-            return true;
         }
 
         [Fact]
-        public bool SocialTaxCalculator_CalculateTax_If_Income_Higher_Than_3000_Should_Adjust_Taxable_Income_As_3000_And_Should_Return_SocialTax()
+        public void SocialTaxCalculator_CalculateTax_If_Income_Higher_Than_3000_Should_Adjust_Taxable_Income_As_3000_And_Should_Return_SocialTax()
         {
             var taxPayer = new TaxEngine("Mehmet Aksak", DateTime.Now, 3400, 1234567890, 0);
 
             var tax = _socialTaxCalculator.CalculateTax(taxPayer);
 
             Assert.Equal(300, tax);
-            return true;
         }
 
         [Theory]
@@ -141,14 +134,13 @@ namespace TaxCalculator.UnitTests.Infrastructure.Services
         [InlineData("Ihsan Yoldas", 1250, 12349, 250, 18.75)]
         [InlineData("Didem Zorba", 1100, 12349, 100, 0)]
         [InlineData("Dorota Wyrobek", 3500, 12346, 50, 300)]
-        public bool SocialTaxCalculator_CalculateTax_Should_Return_SocialTax(string fullName, decimal grossIncome, ulong ssn, decimal charitySpent, decimal expectedTax)
+        public void SocialTaxCalculator_CalculateTax_Should_Return_SocialTax(string fullName, decimal grossIncome, ulong ssn, decimal charitySpent, decimal expectedTax)
         {
             var taxPayer = new TaxEngine(fullName, DateTime.Now, grossIncome, ssn, charitySpent);
 
             var tax = _socialTaxCalculator.CalculateTax(taxPayer);
 
             Assert.Equal(expectedTax, tax);
-            return true;
         }
     }
 }
