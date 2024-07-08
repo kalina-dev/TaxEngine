@@ -4,22 +4,22 @@ namespace TaxCalculator.Infrastructure.Helpers
 {
     public class HelperTaxService : IHelperTaxService
     {
-        private readonly ITaxRepository _taxConfigRepository;
-        public HelperTaxService(ITaxRepository taxConfigRepository)
+        private readonly ITaxRepository _taxRepository;
+        public HelperTaxService(ITaxRepository taxRepository)
         {
-            _taxConfigRepository = taxConfigRepository;
+            _taxRepository = taxRepository;
         }
 
         public decimal TaxableIncome(decimal grossIncome)
         {
-            var tax = _taxConfigRepository.GetTax();
+            var tax = _taxRepository.GetTax();
 
             return grossIncome > tax.MinIncomeTax ? grossIncome - tax.MinIncomeTax : 0;
         }
 
         public decimal CharityAdjustment(decimal grossIncome, decimal charitySpent)
         {
-            var tax = _taxConfigRepository.GetTax();
+            var tax = _taxRepository.GetTax();
 
             return Math.Min(charitySpent, grossIncome * tax.CharitySpentMaxRate);
         }

@@ -11,6 +11,7 @@ using TaxCalculator.Infrastructure.Services;
 using TaxCalculator.Infrastructure.Middleware;
 using TaxCalculator.Infrastructure.Helpers;
 using TaxCalculator.Model.Interfaces.Application;
+using TaxCalculator.Model.DbService;
 
 Batteries.Init(); // Initialize SQLite
 
@@ -27,6 +28,11 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.Configure<Tax>(builder.Configuration.GetSection("TaxConfig"));
+// Add services to the container.
+builder.Services.Configure<TaxesStoreDatabaseSettings>(
+    builder.Configuration.GetSection("TaxesStoreDatabase"));
+
+builder.Services.AddSingleton<TaxDbService>();
 
 builder.Services.AddTransient<ITaxCalculationService, TaxCalculationService>();
 
