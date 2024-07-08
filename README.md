@@ -7,10 +7,11 @@ Technologies
 
 1. 	.NET 6: The framework used to build the web API.
 2.	EF: ORM for data access when the requirements are extended further.
-3.	InMemory: For caching and in-memory operations.
-4.	Serilog: Logging library in the Console.
-5.	XUnit: Testing framework for unit tests.
-6. 	Docker support.
+3.  MongoDb for tax management feature added.
+4.	InMemory: For caching and in-memory operations.
+5.	Serilog: Logging library in the Console.
+6.	XUnit: Testing framework for unit tests.
+7. 	Docker support.
 
 
 
@@ -18,10 +19,9 @@ Design patterns:
 1. Factory method;
 2. Template method.
 3. Repository pattern.
-4. Unit of Work.
-5. Chain of Responsibility.
-6. REST API design best practices.
-7. Sync and async methods.
-8. DI pattern.
+4. Chain of Responsibility.
+5. REST API design best practices.
+6. Sync and async methods.
+7. DI pattern.
 
 
